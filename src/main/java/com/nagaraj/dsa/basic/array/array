@@ -1,0 +1,22 @@
+1. Array
+In Java, there are mainly two types of arrays.
+Array : Fixed-size collection of similar data types stored contiguously, ideal when element count is known.
+ArrayList : Dynamic and grow as needed. It is from the Java Collections Framework, suitable when element count varies.
+
+class ArrayTest{
+    public static void main(String[] args) {
+
+        // Array example
+        int[] arr = {10, 20, 30, 40, 50};
+        System.out.println(Arrays.toString(arr));
+
+        // ArrayList example
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        System.out.println(list);
+    }
+}
+
+
