@@ -1,4 +1,4 @@
-package org.example;
+package com.nagaraj.dsa.basic;
 
 public class Main {
     public static void main(String[] args) {
