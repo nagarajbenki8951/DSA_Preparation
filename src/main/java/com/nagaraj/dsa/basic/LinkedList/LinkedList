@@ -193,3 +193,5 @@ Common Interview Patterns :
     =>“Do we need separate logic when head changes?”
   ->With a dummy node, you treat the head like any other node — so your logic stays uniform and your
     code gets much cleaner.
+
+Notes link : https://algomaster.io/learn/dsa/linked-list-introduction
