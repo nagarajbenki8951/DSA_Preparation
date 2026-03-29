@@ -10,6 +10,12 @@ public class LinkedListDemoIncludingTail {
         ll.insertLast(50);
         ll.insert(2,60);
         ll.display();
+        ll.deleteFirst();
+        ll.display();
+        ll.deleteLast();
+        ll.display();
+        ll.delete(2);
+        ll.display();
     }
     private Node head;
     private Node tail;
@@ -92,6 +98,20 @@ public class LinkedListDemoIncludingTail {
         return val;
     }
 
+    public void delete(int index){
+        if(size<=1){
+            deleteFirst();
+        }
+        if(index == size-1){
+            deleteLast();
+        }
+
+        Node node = get(index-1);
+        node.next = node.next.next;
+        size-=1;
+
+    }
+
 
     // To display all data iterate till we found head as null dont use head only it will change the structure of
     // linkedlist take temp and modify
@@ -102,6 +122,7 @@ public class LinkedListDemoIncludingTail {
             System.out.print(temp.val+" ->");
             temp = temp.next;
         }
+        System.out.println("");
     }
 
     class Node{
