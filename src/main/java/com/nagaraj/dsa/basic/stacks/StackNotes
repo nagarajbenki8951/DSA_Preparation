@@ -1,0 +1,171 @@
+Stacks is a fundamental data structure in computer science that follows the LIFO principle
+   LIFO — Last In, First Out.
+
+That means the last element you push onto the stack is always the first one to come out.
+
+1  top
+3
+5
+7
+9  bottom
+
+Even though stacks sound simple, they power some of the most critical parts of modern software systems like:
+    ->Expression evaluation in compilers
+    ->Undo and redo functionality in text editors
+    ->The function call stack in programming languages
+    ->And algorithms like iterative DFS and backtracking
+
+What is a Stack?
+->A stack is a linear data structure that follows the Last In, First Out principle - or LIFO in short.
+->That simply means: The last item you add is the first one to be removed.
+->A simple way to picture it is like a stack of plates: You add new plates to the top… and when
+  you need one, you take it from the top.
+->You can’t remove something from the middle without first removing everything above it
+->That’s exactly how a stack works.
+->This simple rule is what makes stacks so useful. Whenever you need to access the most recently added item first, a
+  stack is the perfect data structure.
+
+Common Stack Operations:
+* Push: This operation adds a new element to the top of the stack. It runs in O(1) constant time no matter how many
+        elements are already in the stack.
+* Pop: This operation removes the topmost element from the stack. Now the previous element becomes the new top.
+       It also runs in O(1) time.
+* Peek / Top: If you just want to see what’s at the top without removing it. That’s what peek() or top() is for.
+              This also runs in O(1) time.
+* IsEmpty: This simply checks if there’s anything in the stack.
+->It’s especially useful to prevent popping from an empty stack. And yes, it runs in O(1) time too.
+->These four operations are the foundation of everything stacks can do. And they’re all constant time, which makes
+  stacks incredibly efficient.
+
+Stack Implementation:
+1. Using Arrays :
+   ->This is the most common and straightforward approach to implement a stack.
+   ->You maintain two things:
+     =>An array to store the elements
+     =>A pointer called top to track the index of the last inserted element.
+   ->It is initially set to -1 to represent an empty stack.
+   ->With this setup, you perform all stack operations at the end of the array, which makes them run in O(1) time.
+
+Ex: class ArrayStack {
+        int[] stack;
+        int top;
+        int capacity;
+
+        ArrayStack(int size) {
+            stack = new int[size];
+            top = -1;
+            capacity = size;
+        }
+
+        void push(int value) {
+            if (top == capacity - 1) {
+                System.out.println("Stack Overflow");
+                return;
+            }
+            stack[++top] = value;
+        }
+
+        int pop() {
+            if (top == -1) {
+                System.out.println("Stack Underflow");
+                return -1;
+            }
+            return stack[top--];
+        }
+
+        int peek() {
+            return stack[top];
+        }
+
+        boolean isEmpty() {
+            return top == -1;
+        }
+    }
+
+
+->For push operation, first check if there’s room in the stack. If yes, increment top and place the new value
+  at new top index.
+->For pop operation, first check if the stack is empty. If not, return the element at stack[top] and then
+  decrement top.
+->For peek operation, simply return the element at top
+->and for IsEmpty operation, check if top is still at -1, which means no elements have been added yet.
+
+->The main limitation of this approach is that the stack size is fixed.
+->Once the array is full, you can’t push new elements unless you manually resize it.
+->That’s why many modern languages provide dynamic arrays (like ArrayList in Java or list in Python) that handle
+  resizing under the hood.
+
+2. Using Linked Lists:
+->Another popular way to implement a stack is by using a linked list.
+->In this approach, the head of the linked list represents the top of the stack.
+  That means:
+  =>Push means inserting a new node at the head.
+  =>and Pop means removing the node from the head.
+->Since all operations are focused at the head, they run in O(1) time — just like the array implementation.
+
+Ex: class Node {
+        int value;
+        Node next;
+        Node(int value) {
+            this.value = value;
+        }
+    }
+
+    class LinkedListStack {
+        Node head;
+
+        void push(int value) {
+            Node node = new Node(value);
+            node.next = head;
+            head = node;
+        }
+
+        int pop() {
+            if (head == null) {
+                System.out.println("Stack Underflow");
+                return -1;
+            }
+            int value = head.value;
+            head = head.next;
+            return value;
+        }
+
+        int peek() {
+            if (head == null) return -1;
+            return head.value;
+        }
+
+        boolean isEmpty() {
+            return head == null;
+        }
+    }
+
+->For push operation, create a new node and point it’s next to the current head. Then, update head to this new node.
+  This makes the new node the top of the stack.
+->For pop operation, first check if the head is null that means the stack is empty. If not, return the value at the
+  head and move the head to the next node. This effectively removes the current top element.
+->For peek operation, if the head is null return -1 since the stack is empty else simply return head.value without
+  removing it.
+->For isEmpty, if head is null, it means the stack is empty.
+->Since the size of linked list is dynamic, you don’t need to worry about resizing like you would with a static array.
+->The trade-off is that each node stores an extra pointer (next), which means more memory is used compared to a plain
+  array.
+
+3. Built-in Libraries:
+->In most real-world applications and even coding interviews, you rarely need to implement a stack from scratch.
+  That’s because most modern programming languages already offer efficient, battle-tested stack implementations.
+
+Java
+->Java provides two main ways to work with stacks: Legacy stack class and recommended Deque interface.
+->ArrayDeque is faster and more memory-efficient than Stack. It supports all standard stack operations and is the
+  preferred choice for new code.
+
+ Ex: // Option 1: Legacy Stack class
+     Stack<Integer> stack = new Stack<>();
+     stack.push(10);
+     stack.pop();
+
+     // Option 2: Recommended Deque interface
+     Deque<Integer> stack2 = new ArrayDeque<>();
+     stack2.push(10);
+     stack2.pop();
